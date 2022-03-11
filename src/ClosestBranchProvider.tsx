@@ -1,17 +1,18 @@
 import { FC, ReactNode, createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { Branch } from './Branch';
 import { SearchLocation } from './SearchLocation';
-import { closestBranchTo } from './distances';
+import { closestBranchTo, getNearestBranches } from './distances';
 import useLoading, { States } from './useLoading';
 
 export interface ClosestBranchContextData {
-  closestBranch?: Branch | undefined;
-  search?: SearchLocation | undefined;
+  closestBranch?: Branch;
+  search?: SearchLocation;
+  nearByBranches?: Branch[];
 }
 
 export interface ClosestBranchContextType extends ClosestBranchContextData {
   state: States;
-  branches: Branch[] | undefined;
+  branches?: Branch[];
   actions: {
     setClosestBranch: (branch: Branch) => void;
     setSearch: (search: SearchLocation) => void;
@@ -44,6 +45,21 @@ export const useClosestBranch = (): ClosestBranchContextType['closestBranch'] =>
   return closestBranchData.closestBranch;
 };
 
+/**
+ * useNearByBranches hook to use it in function component
+ * @returns Near by branches details
+ */
+ export const useNearByBranches = (): ClosestBranchContextType['nearByBranches'] => {
+  const closestBranchData = useContext(ClosestBranchContext);
+  if (closestBranchData === undefined) {
+    throw new Error(
+      'useNearByBranches must be used within a component wrapped with ClosestBranchProvider'
+    );
+  }
+
+  return closestBranchData.nearByBranches;
+};
+
  /**
  * ClosestBranchProvider
  */
@@ -55,6 +71,11 @@ export const ClosestBranchProvider: FC<ClosestBranchProviderProps> = (props) => 
   const setClosestBranch = async (closestBranch?: ClosestBranchContextType['closestBranch']) => {
     setData({ ...data, closestBranch });
   };
+
+  const setNearByBranches = async (nearByBranches?: ClosestBranchContextType['nearByBranches']) => {
+    setData({ ...data, nearByBranches });
+  };
+
   const setSearch = async (search?: ClosestBranchContextType['search']) => {
     setData({ ...data, search });
   };
@@ -71,9 +92,11 @@ export const ClosestBranchProvider: FC<ClosestBranchProviderProps> = (props) => 
 
   useEffect(() => {
     if (branches && typeof data?.search === 'object') {
-      setClosestBranch(closestBranchTo(data.search, branches));
+      setClosestBranch(closestBranchTo(data.search, branches) as Branch);
+      setNearByBranches(getNearestBranches(data.search, branches) as Branch[]);
     } else {
       setClosestBranch(undefined);
+      setNearByBranches(undefined);
     }
   }, [data?.search, branches]);
 
