@@ -1,5 +1,6 @@
 import { StyleSheet, View, Text } from 'react-native';
 import { useClosestBranch } from './ClosestBranchProvider';
+import { prettifyString } from './utils';
 
 export default function BranchDetails() {
   const branch = useClosestBranch();
@@ -16,14 +17,14 @@ export default function BranchDetails() {
         <View style={styles.row}>
           <Text style={styles.text}>Services:</Text>
           <Text style={styles.textBold}>
-            {branch.ServiceAndFacility.join(', ')}
+            {prettifyString(branch.ServiceAndFacility)}
           </Text>
         </View>
       )}
       {branch.Accessibility && (
         <View style={styles.row}>
           <Text style={styles.text}>Accessibility:</Text>
-          <Text style={styles.textBold}>{branch.Accessibility.join(', ')}</Text>
+          <Text style={styles.textBold}>{prettifyString(branch.Accessibility)}</Text>
         </View>
       )}
     </View>
