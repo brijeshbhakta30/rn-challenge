@@ -1,7 +1,11 @@
 import { StyleSheet, View, Text } from 'react-native';
-import { Branch } from './Branch';
+import { useClosestBranch } from './ClosestBranchProvider';
 
-export default function BranchDetails({ branch }: { branch: Branch }) {
+export default function BranchDetails() {
+  const branch = useClosestBranch();
+  if (!branch) {
+    return null;
+  }
   return (
     <View style={styles.container}>
       <View style={styles.row}>

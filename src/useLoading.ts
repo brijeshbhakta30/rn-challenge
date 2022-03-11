@@ -3,6 +3,8 @@ import { useFonts } from 'expo-font';
 import * as Location from 'expo-location';
 import { Branch } from './Branch';
 
+export type States = 'loading-fonts' | 'loading-branches' | 'ready' | 'error';
+
 async function fetchBranches(): Promise<undefined | Branch[]> {
   const branches = await fetch(
     'https://openbanking.santander.co.uk/sanuk/external/open-banking/v2.2/branches',
@@ -12,9 +14,7 @@ async function fetchBranches(): Promise<undefined | Branch[]> {
 }
 
 export default function useLoading() {
-  const [state, setState] = useState<
-    'loading-fonts' | 'loading-branches' | 'ready' | 'error'
-  >('loading-fonts');
+  const [state, setState] = useState<States>('loading-fonts');
   const [branches, setBranches] = useState<undefined | Branch[]>(undefined);
 
   const [fontsLoaded] = useFonts({

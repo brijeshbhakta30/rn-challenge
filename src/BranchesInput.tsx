@@ -3,13 +3,14 @@ import { View, TextInput, StyleSheet, Text } from 'react-native';
 import * as Location from 'expo-location';
 import { SearchLocation } from './SearchLocation';
 import InputResults from './InputResults';
+import { ClosestBranchContextType } from './ClosestBranchProvider';
 
 export default function BranchesInput({
   search,
   setSearch,
 }: {
   search: SearchLocation;
-  setSearch: React.Dispatch<React.SetStateAction<SearchLocation>>;
+  setSearch: ClosestBranchContextType['actions']['setSearch'];
 }) {
   const [input, setInput] = useState('');
   useEffect(() => {
