@@ -47,7 +47,7 @@ export default function Spinner({ height }: { height: number }) {
 
 const styles = StyleSheet.create({
   circle: {
-    borderColor: '#EC0000',
+    borderColor: '#000000',
   },
   backgroundCircle: {
     borderColor: 'transparent',

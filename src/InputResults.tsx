@@ -13,7 +13,7 @@ export default function InputResults({
   if (search === 'fetching') {
     return (
       <>
-        <Spinner height={20} />
+        <Spinner height={14} />
         <Text style={styles.text}>
           &nbsp;&nbsp;Searching for{' '}
           <Text style={styles.inputText}>{input}</Text>
@@ -46,8 +46,8 @@ export default function InputResults({
 const styles = StyleSheet.create({
   text: {
     fontFamily: 'textRegular',
-    fontSize: 18,
-    color: '#ED0000',
+    fontSize: 14,
+    color: '#000000',
   },
   inputText: {
     fontFamily: 'textBold',

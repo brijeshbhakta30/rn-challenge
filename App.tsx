@@ -14,10 +14,10 @@ export default function App() {
           <StatusBar style="auto" />
           <Map/>
           {state === 'ready' ? (
-            <>
+            <View style={styles.branchContainer}>
               <BranchesInput search={search} setSearch={setSearch} />
               <BranchDetails />
-            </>
+            </View>
           ) : state === 'error' ? (
             <View style={styles.centred}>
               <Text style={styles.error}>An error has occurred</Text>
@@ -50,4 +50,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  branchContainer: {
+    backgroundColor: '#fff',
+    flex: 0.4,
+    paddingHorizontal: 16,
+  }
 });

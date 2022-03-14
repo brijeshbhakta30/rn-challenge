@@ -45,21 +45,23 @@ export default function BranchesInput({
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 80,
-    marginHorizontal: 20,
+    marginTop: 16,
   },
   result: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    paddingVertical: 12,
+    borderColor: '#ccc',
+    borderBottomWidth: 1,
   },
   input: {
     backgroundColor: '#fff',
     fontFamily: 'textRegular',
+    borderColor: '#ccc',
+    borderWidth: 1,
     fontSize: 18,
     paddingVertical: 5,
     paddingHorizontal: 8,
     color: 'black',
-    marginBottom: 10,
   },
 });

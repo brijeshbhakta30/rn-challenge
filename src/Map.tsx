@@ -71,7 +71,7 @@ export default function Map() {
 
 const styles = StyleSheet.create({
   container: {
-    ...StyleSheet.absoluteFillObject,
+    flex: 0.6,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
